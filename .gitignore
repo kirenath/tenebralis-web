@@ -48,3 +48,9 @@ id_ed25519
 *.pem
 *.pub
 *.pem.pub
+
+# docs
+docs/
+
+# prd
+prd/
