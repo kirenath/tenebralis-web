@@ -20,8 +20,14 @@ export function DreamOsShell() {
       <WallpaperLayer />
 
       {/* Phone container — centred + max-width on desktop */}
-      <div className="relative mx-auto flex h-dvh max-w-[480px] flex-col overflow-hidden bg-white/40 shadow-2xl backdrop-blur-sm dark:bg-black/40 md:rounded-3xl md:my-4 md:h-[calc(100dvh-2rem)] md:border md:border-white/20">
-        <StatusBar />
+      <div
+        className="relative mx-auto flex h-dvh max-w-[480px] flex-col overflow-hidden bg-white/40 shadow-2xl backdrop-blur-sm dark:bg-black/40 md:rounded-3xl md:my-4 md:h-[calc(100dvh-2rem)] md:border md:border-white/20"
+        style={{ paddingTop: "env(safe-area-inset-top)" }}
+      >
+        {/* StatusBar only on desktop (mobile PWA uses the real system bar) */}
+        <div className="hidden md:block">
+          <StatusBar />
+        </div>
 
         {/* Desktop pager fills remaining space */}
         <DesktopPager onPageChange={setCurrentPage}>
