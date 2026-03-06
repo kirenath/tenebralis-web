@@ -54,3 +54,7 @@ docs/
 
 # prd
 prd/
+
+# Serwist
+public/sw*
+public/swe-worker*

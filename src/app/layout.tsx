@@ -16,12 +16,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  applicationName: "Tenebralis",
   title: "Tenebralis Dream System",
   description: "界影浮光 — 快穿系统手机",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
     title: "Tenebralis",
+  },
+  formatDetection: {
+    telephone: false,
   },
 };
 

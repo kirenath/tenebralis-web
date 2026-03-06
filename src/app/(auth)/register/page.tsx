@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Loader2, Mail, Lock, ShieldCheck, ArrowRight, ArrowLeft } from "lucide-react";
+import { Loader2, Mail, Lock, ShieldCheck, ArrowRight, ArrowLeft, Eye, EyeOff } from "lucide-react";
 import { createClient } from "@/services/supabase/client";
 
 export default function RegisterPage() {
@@ -14,6 +14,8 @@ export default function RegisterPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   // OTP verification state
   const [step, setStep] = useState<"register" | "verify">("register");
@@ -185,13 +187,21 @@ export default function RegisterPage() {
                         <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-slate-400 group-focus-within:text-slate-700 transition-colors duration-300" strokeWidth={1.5} />
                         <input
                           id="password"
-                          type="password"
+                          type={showPassword ? "text" : "password"}
                           placeholder="至少 8 位，含大小写、数字及符号"
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
                           required
-                          className="w-full h-[52px] pl-[42px] pr-4 rounded-2xl bg-white/40 border border-white/30 text-slate-800 placeholder:text-slate-400/80 text-[13px] focus:outline-none focus:bg-white/60 focus:border-white/80 focus:ring-4 focus:ring-black/5 transition-all duration-300 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] font-mono tracking-widest"
+                          className="w-full h-[52px] pl-[42px] pr-12 rounded-2xl bg-white/40 border border-white/30 text-slate-800 placeholder:text-slate-400/80 text-[13px] focus:outline-none focus:bg-white/60 focus:border-white/80 focus:ring-4 focus:ring-black/5 transition-all duration-300 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] font-mono tracking-widest"
                         />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword(!showPassword)}
+                          className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 transition-colors duration-300"
+                          tabIndex={-1}
+                        >
+                          {showPassword ? <EyeOff className="w-[18px] h-[18px]" strokeWidth={1.5} /> : <Eye className="w-[18px] h-[18px]" strokeWidth={1.5} />}
+                        </button>
                       </div>
                     </div>
 
@@ -203,13 +213,21 @@ export default function RegisterPage() {
                         <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-slate-400 group-focus-within:text-slate-700 transition-colors duration-300" strokeWidth={1.5} />
                         <input
                           id="confirmPassword"
-                          type="password"
+                          type={showConfirmPassword ? "text" : "password"}
                           placeholder="再次输入密钥"
                           value={confirmPassword}
                           onChange={(e) => setConfirmPassword(e.target.value)}
                           required
-                          className="w-full h-[52px] pl-[42px] pr-4 rounded-2xl bg-white/40 border border-white/30 text-slate-800 placeholder:text-slate-400/80 text-[13px] focus:outline-none focus:bg-white/60 focus:border-white/80 focus:ring-4 focus:ring-black/5 transition-all duration-300 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] font-mono tracking-widest"
+                          className="w-full h-[52px] pl-[42px] pr-12 rounded-2xl bg-white/40 border border-white/30 text-slate-800 placeholder:text-slate-400/80 text-[13px] focus:outline-none focus:bg-white/60 focus:border-white/80 focus:ring-4 focus:ring-black/5 transition-all duration-300 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] font-mono tracking-widest"
                         />
+                        <button
+                          type="button"
+                          onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                          className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 transition-colors duration-300"
+                          tabIndex={-1}
+                        >
+                          {showConfirmPassword ? <EyeOff className="w-[18px] h-[18px]" strokeWidth={1.5} /> : <Eye className="w-[18px] h-[18px]" strokeWidth={1.5} />}
+                        </button>
                       </div>
                     </div>
                   </div>
